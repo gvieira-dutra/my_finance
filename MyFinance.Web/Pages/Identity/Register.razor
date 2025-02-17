@@ -1,0 +1,52 @@
+﻿@page "/register"
+@layout HeadlessLayout
+@inherits RegisterPage
+
+<PageTitle>My Finance - Register</PageTitle>
+
+<MudGrid Justify="Justify.Center">
+    <MudItem xs="12" sm="8" md="8" lg="6" xl="6" xxl="6">
+        <MudPaper Class="mud-width-full pa-8">
+            <div class="d-flex justify-center pb-8 pc-8">
+                <img src="Images/my_finance.png"
+                     alt="my finance budgetting app"
+                     width="250" />
+            </div>
+            <EditForm Model="@InputModel" OnValidSubmit="OnValidSubmitAsync">
+                <DataAnnotationsValidator/>
+
+                <MudTextField T="string"
+                              Label="E-mail"
+                              HelperText="Mandatory field"
+                              InputType="InputType.Email"
+                              For="@(() => InputModel.Email)"
+                              @bind-Value="InputModel.Email"
+                              />
+
+                <MudTextField T="string"
+                              Label="Password"
+                              HelperText="Mandatory field"
+                              InputType="InputType.Password"
+                              For="@(() => InputModel.Password)"
+                              @bind-Value="InputModel.Password" />
+
+                <div class="d-flex mt-8">
+
+                    @if(IsBusy)
+                    {
+                        <MudProgressCircular Color="Color.Info" Indeterminate="true"/>
+                    }
+                    else
+                    {
+                        <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary">CREATE ACCOUNT</MudButton>
+                        <MudSpacer />
+                        <MudButton href="login" Variant="Variant.Filled">ALREADY HAVE AN ACCOUNT</MudButton>
+                    }
+
+                </div>
+
+            </EditForm>
+
+        </MudPaper>
+    </MudItem>
+</MudGrid>

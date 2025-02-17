@@ -1,0 +1,20 @@
+﻿@page "/logout"
+@inherits LogoutPage
+@layout HeadlessLayout
+
+<PageTitle>My Finance - Logout</PageTitle>
+
+<MudText Typo="Typo.h3">Ending Session...</MudText>
+<MudPaper Class="pa-8 mt-4">
+    <div class="d-flex justify-center pb-8 pt-8">
+        <img src="Images/my_finance.png" alt="My Finance - Your Favorite Budgeting App" width="200" />
+    </div>
+    <MudAlert Severity="Severity.Info">
+        <div>
+            Session Finalized...
+            <MudButton Variant="Variant.Text" Href="/login">
+                GO TO LOGIN PAGE
+            </MudButton>
+        </div>
+    </MudAlert>
+</MudPaper>
