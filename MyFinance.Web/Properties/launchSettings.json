@@ -7,7 +7,7 @@
       "launchBrowser": true,
       "hotReloadProfile": "aspnetcore",
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "applicationUrl": "https://localhost:5209",
+      "applicationUrl": "https://victorious-bay-0c76ea00f.6.azurestaticapps.net",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
@@ -19,7 +19,7 @@
       "browser": "chrome",
       "hotReloadProfile": "aspnetcore",
       "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}",
-      "applicationUrl": "https://localhost:5209;https://localhost:5209",
+      "applicationUrl": "https://victorious-bay-0c76ea00f.6.azurestaticapps.net",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
