@@ -29,7 +29,12 @@
                               InputType="InputType.Password"
                               For="@(() => InputModel.Password)"
                               @bind-Value="InputModel.Password" />
-
+                <div>
+                    <br />
+                    <h4>For testing, use credentials: </h4>
+                    <p>Email: test@mail.com </p>
+                    <p>Password: Welcome123!</p>
+                </div>
                 <div class="d-flex mt-8">
 
                     @if (IsBusy)
@@ -38,14 +43,14 @@
                     }
                     else
                     {
-                        <MudButton ButtonType="ButtonType.Submit" 
-                                   Variant="Variant.Filled" 
+                        <MudButton ButtonType="ButtonType.Submit"
+                                   Variant="Variant.Filled"
                                    Color="Color.Primary">
-                                   LOG IN
-                               </MudButton>
+                            LOG IN
+                        </MudButton>
                         <MudSpacer />
-                        <MudButton href="register" 
-                            Variant="Variant.Filled">
+                        <MudButton href="register"
+                                   Variant="Variant.Filled">
                             REGITER
                         </MudButton>
                     }

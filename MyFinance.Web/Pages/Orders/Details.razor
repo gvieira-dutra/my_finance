@@ -1,0 +1,44 @@
+﻿@page "/orders/{orderNumber}"
+@inherits DetailsPage
+
+<h1>Order Details</h1>
+<br />
+@if (Order is not null)
+{
+    <h4>Order Number</h4>
+    <p>@Order.Number</p>
+    <br />
+    <h4>Order Date</h4>
+    <p>@Order.CreatedAt.ToString("MM-dd-yyyy")</p>
+    <br />
+    <h4>Last Update</h4>
+    <p>@Order.UpdatedAt.ToString("MM-dd-yyyy")</p>
+    <br />
+    <h4>Product</h4>
+    <p>@Order.Product.Title</p>
+    <br />
+    <h4>Product Value</h4>
+    <p>@Order.Product.Price.ToString("C")</p>
+    <br />
+    <h4>Discount</h4>
+    <p>@(Order.Voucher is null ? "Not Applicable" : Order.Voucher.Amount.ToString("C"))</p>
+    <br />
+    <h4>Order Total Amount</h4>
+    <p>@Order.Total.ToString("C")</p>
+    <br />
+    <h4>Status</h4>
+    <OrderStatus Status="Order.Status" />
+    <p>--</p>
+    <br />
+    <br />
+    <br />
+    <CascadingValue Value="this">
+        <OrderAction Order="Order" />
+    </CascadingValue>
+}
+else
+{
+    <MudSkeleton Animation="Animation.Wave" />
+    <MudSkeleton Animation="Animation.Wave" />
+    <MudSkeleton Animation="Animation.Wave" />
+}

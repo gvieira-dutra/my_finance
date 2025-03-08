@@ -1,0 +1,22 @@
+﻿@page "/orders/{number}/confirm"
+@inherits ConfirmOrderPaymentPage
+
+@if(Order is not null)
+{
+    @if(Order.Status == EOrderStatus.Paid)
+    {
+        <h1>Order Processed Successfully!</h1>
+        <p>Congratulations on your order, now you have access to all platform features.</p>
+    }
+    else
+    {
+        <h1>Ops, something went wrong!</h1>
+        <p>Your payment could not be processed. Please try again or contact support.</p>
+    }
+}
+else 
+{
+    <MudSkeleton Animation="Animation.Wave"></MudSkeleton>
+    <MudSkeleton Animation="Animation.Wave"></MudSkeleton>
+    <MudSkeleton Animation="Animation.Wave"></MudSkeleton>
+}

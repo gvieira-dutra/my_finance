@@ -1,7 +1,9 @@
 ﻿using MyFinance.API.Common.Api;
 using MyFinance.API.Endpoints.Categories;
 using MyFinance.API.Endpoints.Identity;
+using MyFinance.API.Endpoints.Orders;
 using MyFinance.API.Endpoints.Reports;
+using MyFinance.API.Endpoints.Stripe;
 using MyFinance.API.Endpoints.Transactions;
 using MyFinance.API.Models;
 
@@ -45,6 +47,30 @@ public static class Endpoint
             .MapEndpoint<GetIncomesAndExpensesEndpoint>()
             .MapEndpoint<GetIncomesByCategoryEndpoint>();
 
+        endpoints.MapGroup("/v1/products")
+            .WithTags("Products")
+            .MapEndpoint<GetAllProductsEndpoint>()
+            .MapEndpoint<GetProductBySlugEndpoint>();
+
+        endpoints.MapGroup("/v1/payments-stripe")
+            .WithTags("Payments - Stripe")
+            .RequireAuthorization()
+            .MapEndpoint<CreateSessionEndpoint>();
+
+        endpoints.MapGroup("v1/orders")
+            .WithTags("Orders")
+            .RequireAuthorization()
+            .MapEndpoint<CancelOrderEndpoint>()
+            .MapEndpoint<CreateOrderEndpoint>()
+            .MapEndpoint<GetAllOrdersEndpoint>()
+            .MapEndpoint<GetOrderByNumberEndpoint>()
+            .MapEndpoint<PayOrderEndpoint>()
+            .MapEndpoint<RefundOrderEndpoint>();
+
+        endpoints.MapGroup("v1/vouchers")
+            .WithTags("Voucher")
+            .RequireAuthorization()
+            .MapEndpoint<GetVoucherByNumberEndpoint>();
 
         endpoints.MapGroup("v1/identity")
             .WithTags("Identity")

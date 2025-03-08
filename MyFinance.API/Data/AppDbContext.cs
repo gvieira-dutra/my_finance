@@ -36,7 +36,6 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     public DbSet<IncomeByCategory> IncomesByCategory { get; set; } = null!;
     public DbSet<ExpensesByCategory> ExpensesByCategory { get; set; } = null!;
 
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //Assemblly is provided by System.Reflection

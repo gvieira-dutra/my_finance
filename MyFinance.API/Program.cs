@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddConfigurations();
 builder.AddSecurity();
 builder.AddDataContexts();
+await builder.SeedMockDataAsync();
 builder.AddCrossOrigin();
 builder.AddSwagger();
 builder.AddServices();

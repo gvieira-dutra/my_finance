@@ -1,5 +1,4 @@
 ﻿using MyFinance.Core.Models;
-using MyFinance.Core.Requests.Categories;
 using MyFinance.Core.Requests.Transactions;
 using MyFinance.Core.Response;
 

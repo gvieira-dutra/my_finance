@@ -40,7 +40,7 @@ public partial class ExpensesByCategoryChartComponent : ComponentBase
         foreach (var item in result.Data)
         {
             Labels.Add($"{item.Category} ({item.Expenses:C})");
-            Data.Add(-(double)item.Expenses);
+            Data.Add((double)item.Expenses);
         }
 
     }

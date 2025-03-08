@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MyFinance.API.Migrations
 {
     /// <inheritdoc />
-    public partial class rebuildingDb3 : Migration
+    public partial class rebuildingDb8 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,7 +92,7 @@ namespace MyFinance.API.Migrations
                     Title = table.Column<string>(type: "NVARCHAR(80)", maxLength: 80, nullable: false),
                     Description = table.Column<string>(type: "NVARCHAR(80)", maxLength: 80, nullable: true),
                     IsActive = table.Column<bool>(type: "BIT", nullable: false),
-                    Amount = table.Column<string>(type: "NVARCHAR(64)", nullable: false)
+                    Amount = table.Column<decimal>(type: "MONEY", nullable: false)
                 },
                 constraints: table =>
                 {

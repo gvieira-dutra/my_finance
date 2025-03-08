@@ -7,6 +7,7 @@ public static class Configuration
 {
     public const string HttpClientName = "myFinance";
     public static string BackEndUrl { get; set; } = "";
+    public static string StripePublicKey { get; set; } = "";
 
     public static MudTheme Theme = new()
     {
@@ -27,7 +28,7 @@ public static class Configuration
             AppbarText = Colors.Shades.Black,
             TextPrimary = Colors.Shades.Black,
             DrawerText = Colors.Shades.White,
-            DrawerBackground = Colors.LightGreen.Lighten4
+            DrawerBackground = Colors.LightGreen.Darken4
         },
         PaletteDark = new PaletteDark
         {

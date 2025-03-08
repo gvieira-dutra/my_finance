@@ -448,9 +448,8 @@ namespace MyFinance.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Amount")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("MONEY");
 
                     b.Property<string>("Description")
                         .HasMaxLength(80)

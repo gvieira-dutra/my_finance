@@ -1,0 +1,57 @@
+﻿@page "/premium"
+@inherits ListProductsPage
+
+<MudContainer class="mt-16">
+    <MudText Typo="Typo.h3" Align="Align.Center" GutterBottom="true">Premium</MudText>
+    <MudText Align="Align.Center">
+        Get unlimited access, with unlimited transactions and categories!
+    </MudText>
+    <MudGrid Class="mt-8 justify-center">
+        @foreach (var product in Products)
+        {
+            <MudItem xs="12" sm="6" md="4">
+                <MudCard Elevation="25" Class="rounded-lg pb-4">
+
+                    <MudCardHeader>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.h5" Align="Align.Center">
+                                @product.Title
+                            </MudText>
+                        </CardHeaderContent>
+                    </MudCardHeader>
+
+                    <MudCardContent>
+                        <div Class="d-flex justify-center">
+                            <MudText Typo="Typo.h3">
+                                @product.Price.ToString("C")
+                            </MudText>
+                        </div>
+
+                        <MudList T="string" class="x-auto mt-4" style="width: 300px">
+                            <MudListItem T="string" Icon="@Icons.Material.Filled.Check">
+                                Unlimited Transactions
+                            </MudListItem>
+                        </MudList>
+                        <MudList T="string" class="x-auto mt-4" style="width: 300px">
+                            <MudListItem T="string" Icon="@Icons.Material.Filled.Check">
+                                Unlimited Categories
+                            </MudListItem>
+                        </MudList>
+                        <MudList T="string" class="x-auto mt-4" style="width: 300px">
+                            <MudListItem T="string" Icon="@Icons.Material.Filled.Check">
+                                Tax Support
+                            </MudListItem>
+                        </MudList>
+
+                    </MudCardContent>
+                    <MudCardActions Class="justify-center">
+                        <MudButton Href="@($"/checkout/{product.Slug}")" Variant="Variant.Filled" Color="Color.Primary">
+                            GET STARTED
+                        </MudButton>
+                    </MudCardActions>
+
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+</MudContainer>

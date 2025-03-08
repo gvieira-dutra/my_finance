@@ -29,7 +29,7 @@ public class VoucherMapping : IEntityTypeConfiguration<Voucher>
 
         builder.Property(x => x.Amount)
             .IsRequired(true)
-            .HasColumnType("NVARCHAR");
+            .HasColumnType("MONEY");
 
         builder.Property(x => x.IsActive)
             .IsRequired(true)

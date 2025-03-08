@@ -1,3 +1,4 @@
+CREATE OR ALTER VIEW [dbo].[vwGetExpensesByCategory] AS
 SELECT [Transaction].UserId,
        [Category].Title AS [Category],
        YEAR([Transaction].[PaidOrReceivedAt]) AS [Year],

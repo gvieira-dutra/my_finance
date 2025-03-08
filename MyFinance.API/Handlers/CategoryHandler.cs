@@ -19,7 +19,7 @@ public class CategoryHandler(AppDbContext context) : ICategoryHandler
                 Title = request.Title,
                 Description = request.Description
             };
-            
+
             await context.AddAsync(category);
             await context.SaveChangesAsync();
 
@@ -63,7 +63,7 @@ public class CategoryHandler(AppDbContext context) : ICategoryHandler
                 .OrderBy(x => x.Title);
 
             var categories = await query
-                .Skip((request.PageNumber -1) * request.PageSize)
+                .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync();
 

@@ -1,0 +1,29 @@
+﻿<h3>Order Status</h3>
+
+@switch (Status)
+{
+    case EOrderStatus.Canceled:
+        <MudChip T="string" Color="Color.Error">CANCELED</MudChip>
+        break;
+
+    case EOrderStatus.Paid:
+        <MudChip T="string" Color="Color.Success">PAID</MudChip>
+        break;
+
+    case EOrderStatus.Refunded:
+        <MudChip T="string" Color="Color.Info">REFUNDED</MudChip>
+        break;
+
+    case EOrderStatus.WaitingPayment:
+        <MudChip T="string" Color="Color.Warning">WAITING PAYMENT</MudChip>
+        break;
+
+    default:
+    <MudChip T="string" Color="Color.Info">UNDEFINED</MudChip>
+    break;
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public EOrderStatus Status { get; set; }
+}

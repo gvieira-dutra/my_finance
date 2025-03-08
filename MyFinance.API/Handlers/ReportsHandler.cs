@@ -14,14 +14,35 @@ public class ReportsHandler(AppDbContext context) : IReportHandler
     {
         try
         {
-            var data = await context.ExpensesByCategory
-        .AsNoTracking()
-        .Where(x => x.UserId == request.UserId)
-        .OrderByDescending(x => x.Year)
-        .ThenBy(x => x.Category)
-        .ToListAsync();
+            var expensesByCategory = await context.Transactions
+            .Where(t => t.PaidOrReceivedAt.HasValue && // Ensure it's not null
+                t.PaidOrReceivedAt.Value >= DateTime.UtcNow.AddMonths(-11) &&
+                t.PaidOrReceivedAt.Value < DateTime.UtcNow.AddMonths(1) &&
+                t.Type == ETransactionType.Withdraw)
+            .GroupBy(t => new
+            {
+                t.UserId,
+                t.Category.Title,
+                Year = t.PaidOrReceivedAt.Value.Year,
+            })
+            .Select(g => new ExpensesByCategory
+            (
+                g.Key.UserId,
+                g.Key.Title,
+                g.Key.Year,
+                g.Sum(t => t.Amount)
 
-            return new Response<List<ExpensesByCategory>?>(data);
+            ))
+            .ToListAsync();
+
+            //    var data = await context.ExpensesByCategory
+            //.AsNoTracking()
+            //.Where(x => x.UserId == request.UserId)
+            //.OrderByDescending(x => x.Year)
+            //.ThenBy(x => x.Category)
+            //.ToListAsync();
+
+            return new Response<List<ExpensesByCategory>?>(expensesByCategory);
 
         }
         catch
@@ -64,14 +85,36 @@ public class ReportsHandler(AppDbContext context) : IReportHandler
     {
         try
         {
-            var data = await context.IncomesAndExpenses
-        .AsNoTracking()
-        .Where(x => x.UserId == request.UserId)
-        .OrderByDescending(x => x.Year)
-        .ThenBy(x => x.Month)
-        .ToListAsync();
 
-            return new Response<List<IncomeAndExpenses>?>(data);
+            var incomesAndExpenses = await context.Transactions
+            .Where(t => t.PaidOrReceivedAt.HasValue &&
+                t.PaidOrReceivedAt.Value >= DateTime.UtcNow.AddMonths(-11) &&
+                t.PaidOrReceivedAt.Value < DateTime.UtcNow.AddMonths(1))
+            .GroupBy(t => new
+            {
+                t.UserId,
+                Month = t.PaidOrReceivedAt.Value.Month,
+                Year = t.PaidOrReceivedAt.Value.Year
+            })
+            .Select(g => new IncomeAndExpenses
+            (
+                g.Key.UserId,
+                g.Key.Month,
+                g.Key.Year,
+                g.Sum(t => t.Type == ETransactionType.Deposit ? t.Amount : 0),
+                g.Sum(t => t.Type == ETransactionType.Withdraw ? t.Amount : 0)
+            ))
+            .ToListAsync();
+
+
+            //    var data = await context.IncomesAndExpenses
+            //.AsNoTracking()
+            //.Where(x => x.UserId == request.UserId)
+            //.OrderByDescending(x => x.Year)
+            //.ThenBy(x => x.Month)
+            //.ToListAsync();
+
+            return new Response<List<IncomeAndExpenses>?>(incomesAndExpenses);
         }
         catch
         {
@@ -83,18 +126,46 @@ public class ReportsHandler(AppDbContext context) : IReportHandler
     {
         try
         {
-            var data = await context.IncomesByCategory
-        .AsNoTracking()
-        .Where(x => x.UserId == request.UserId)
-        .OrderByDescending(x => x.Year)
-        .ThenBy(x => x.Category)
-        .ToListAsync();
 
-            return new Response<List<IncomeByCategory>?>(data);
+            var incomesByCategory = await context.Transactions
+            .Where(t => t.PaidOrReceivedAt.HasValue &&
+                t.PaidOrReceivedAt.Value >= DateTime.UtcNow.AddMonths(-11) &&
+                t.PaidOrReceivedAt.Value < DateTime.UtcNow.AddMonths(1) &&
+                t.Type == ETransactionType.Deposit)
+            .Join(context.Categories,
+                  t => t.CategoryId,
+                  c => c.Id,
+                  (t, c) => new
+                  {
+                      t.UserId,
+                      Category = c.Title,
+                      Year = t.PaidOrReceivedAt.Value.Year,
+                      Amount = t.Amount
+                  })
+            .GroupBy(g => new { g.UserId, g.Category, g.Year })
+            .Select(g => new IncomeByCategory
+            (
+                g.Key.UserId,
+                g.Key.Category,
+                g.Key.Year,
+                g.Sum(x => x.Amount)
+            ))
+            .ToListAsync();
+
+
+            //    var data = await context.IncomesByCategory
+            //.AsNoTracking()
+            //.Where(x => x.UserId == request.UserId)
+            //.OrderByDescending(x => x.Year)
+            //.ThenBy(x => x.Category)
+            //.ToListAsync();
+
+            return new Response<List<IncomeByCategory>?>(incomesByCategory);
         }
         catch
         {
             return new Response<List<IncomeByCategory>?>(null, 500, "[API023] Unable to retrieve Income by Category report");
         }
     }
+
 }

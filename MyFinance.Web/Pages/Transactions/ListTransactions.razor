@@ -84,7 +84,12 @@
                     @context.Items.Sum(x => x.Amount).ToString("C")
                 </FooterTemplate>
             </PropertyColumn>
-            <TemplateColumn>
+
+        <PropertyColumn Property="x => x.PaidOrReceivedAt"
+                        Title="Date"
+                        Filterable="true" />
+
+        <TemplateColumn>
                 <CellTemplate>
                     <MudStack Row>
                         <MudIconButton Icon="@Icons.Material.Filled.Edit" 
@@ -100,5 +105,6 @@
                     </MudStack>
                 </CellTemplate>
             </TemplateColumn>
+ 
     </Columns>
 </MudDataGrid>

@@ -10,7 +10,7 @@ Theme="Configuration.Theme" />
 
 <AuthorizeView>
     <Authorized>
-        <MudLayout>
+        <MudLayout Class="mb-16">
             <MudAppBar>
                 <MudIconButton 
                     Icon="@Icons.Material.Filled.Menu" 
@@ -19,7 +19,9 @@ Theme="Configuration.Theme" />
                     OnClick="ToggleDrawer"/>
                 My Finance
                 <MudSpacer/>
-                <MudButton Href="/transactions/new" Variant="Variant.Text" StartIcon="@Icons.Material.TwoTone.Add">
+                <MudButton Href="/transactions/new" Variant="Variant.Text"
+                Color="Color.Dark"
+                StartIcon="@Icons.Material.TwoTone.Add">
                     Add Transaction</MudButton>
                 <MudSpacer/>
                 <MudText Typo="Typo.caption">

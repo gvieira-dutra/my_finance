@@ -12,8 +12,8 @@ using MyFinance.API.Data;
 namespace MyFinance.API.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250217162311_rebuildingDb3")]
-    partial class rebuildingDb3
+    [Migration("20250217191311_rebuildingDb8")]
+    partial class rebuildingDb8
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -451,9 +451,8 @@ namespace MyFinance.API.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("Amount")
-                        .IsRequired()
-                        .HasColumnType("NVARCHAR");
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("MONEY");
 
                     b.Property<string>("Description")
                         .HasMaxLength(80)
