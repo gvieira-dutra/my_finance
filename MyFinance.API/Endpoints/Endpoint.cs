@@ -14,14 +14,12 @@ public static class Endpoint
     // Extension Method
     public static void MapEndpoints(this WebApplication app)
     {
-        var endpoints = app
-            .MapGroup("");
+        var endpoints = app.MapGroup("");
 
-        endpoints.MapGroup("/")
-            .WithTags("HealthCheck")
-            .MapGet("/", () => new { message = "OK" });
+        endpoints.MapGroup("/").WithTags("HealthCheck").MapGet("/", () => new { message = "OK" });
 
-        endpoints.MapGroup("v1/categories")
+        endpoints
+            .MapGroup("v1/categories")
             .WithTags("Categories")
             .RequireAuthorization()
             .MapEndpoint<CreateCategoryEndpoint>()
@@ -30,7 +28,8 @@ public static class Endpoint
             .MapEndpoint<GetCategoryByIdEndpoint>()
             .MapEndpoint<GetAllCategoryEndpoint>();
 
-        endpoints.MapGroup("v1/transactions")
+        endpoints
+            .MapGroup("v1/transactions")
             .WithTags("Transactions")
             .RequireAuthorization()
             .MapEndpoint<CreateTransactionEndpoint>()
@@ -39,7 +38,8 @@ public static class Endpoint
             .MapEndpoint<GetTransactionByIdEndpoint>()
             .MapEndpoint<GetTrasactionByPeriodEndpoint>();
 
-        endpoints.MapGroup("/v1/reports")
+        endpoints
+            .MapGroup("/v1/reports")
             .WithTags("Reports")
             .RequireAuthorization()
             .MapEndpoint<GetExpensesByCategoryEndpoint>()
@@ -47,17 +47,20 @@ public static class Endpoint
             .MapEndpoint<GetIncomesAndExpensesEndpoint>()
             .MapEndpoint<GetIncomesByCategoryEndpoint>();
 
-        endpoints.MapGroup("/v1/products")
+        endpoints
+            .MapGroup("/v1/products")
             .WithTags("Products")
             .MapEndpoint<GetAllProductsEndpoint>()
             .MapEndpoint<GetProductBySlugEndpoint>();
 
-        endpoints.MapGroup("/v1/payments-stripe")
+        endpoints
+            .MapGroup("/v1/payments-stripe")
             .WithTags("Payments - Stripe")
             .RequireAuthorization()
             .MapEndpoint<CreateSessionEndpoint>();
 
-        endpoints.MapGroup("v1/orders")
+        endpoints
+            .MapGroup("v1/orders")
             .WithTags("Orders")
             .RequireAuthorization()
             .MapEndpoint<CancelOrderEndpoint>()
@@ -67,16 +70,16 @@ public static class Endpoint
             .MapEndpoint<PayOrderEndpoint>()
             .MapEndpoint<RefundOrderEndpoint>();
 
-        endpoints.MapGroup("v1/vouchers")
+        endpoints
+            .MapGroup("v1/vouchers")
             .WithTags("Voucher")
             .RequireAuthorization()
             .MapEndpoint<GetVoucherByNumberEndpoint>();
 
-        endpoints.MapGroup("v1/identity")
-            .WithTags("Identity")
-            .MapIdentityApi<User>();
+        endpoints.MapGroup("v1/identity").WithTags("Identity").MapIdentityApi<User>();
 
-        endpoints.MapGroup("v1/identity")
+        endpoints
+            .MapGroup("v1/identity")
             .WithTags("Identity")
             .MapEndpoint<LogoutEndpoint>()
             .MapEndpoint<GetRolesEndpoint>();
