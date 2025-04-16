@@ -8,16 +8,16 @@ namespace MyFinance.Web.Pages.Identity
 {
     public partial class LoginPage : ComponentBase
     {
-
         #region Dependencies
 
         [Inject]
         public ISnackbar Snackbar { get; set; } = null!;
+
         [Inject]
         public IAccountHandler Handler { get; set; } = null!;
 
         [Inject]
-        public NavigationManager Navigation{ get; set; } = null!;
+        public NavigationManager Navigation { get; set; } = null!;
 
         [Inject]
         public ICookieAuthenticationStateProvider AuthenticationStateProvider { get; set; } = null!;
@@ -40,8 +40,6 @@ namespace MyFinance.Web.Pages.Identity
             //Merge Pattern
             if (user.Identity is { IsAuthenticated: true })
                 Navigation.NavigateTo("/");
-
-
         }
         #endregion
 
@@ -57,8 +55,8 @@ namespace MyFinance.Web.Pages.Identity
 
                 if (result.IsSuccess)
                 {
-                    await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                    AuthenticationStateProvider.AuthenticationStateChangedNotifier();
+                    //await AuthenticationStateProvider.GetAuthenticationStateAsync();
+                    //AuthenticationStateProvider.AuthenticationStateChangedNotifier();
                     Navigation.NavigateTo("/");
                 }
                 else
@@ -75,6 +73,5 @@ namespace MyFinance.Web.Pages.Identity
         }
 
         #endregion
-
     }
 }
