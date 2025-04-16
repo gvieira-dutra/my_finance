@@ -5,7 +5,7 @@
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
-      "applicationUrl": "https://myfinance-backend-gkdgeefuanc0fbhc.canadacentral-01.azurewebsites.net/:",
+      "applicationUrl": "https://myfinance-backend-gkdgeefuanc0fbhc.canadacentral-01.azurewebsites.net/",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
