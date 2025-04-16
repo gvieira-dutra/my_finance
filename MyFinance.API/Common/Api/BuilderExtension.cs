@@ -86,7 +86,7 @@ public static class BuilderExtension
                 ApiConfiguration.CorsPolicyName,
                 policy =>
                     policy
-                        .SetIsOriginAllowed(_ => true)
+                        .WithOrigins("https://victorious-bay-0c76ea00f.6.azurestaticapps.net")
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         .AllowCredentials()
